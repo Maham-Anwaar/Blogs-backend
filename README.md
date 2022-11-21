@@ -1,7 +1,5 @@
-
-```
 ## _Student Management System_
-
+```
 Completed by Carteblanche through the power of  ✨Magic ✨
 
 ## Installation
