@@ -1,23 +1,6 @@
 # Django
 # Backend Apps
-from db_data.models.assignment import Assignment
-from db_data.models.assignment_file import AssignmentFile
-from db_data.models.attendance import Attendance
 from db_data.models.base_user import BaseUser
-from db_data.models.lecture import Lecture
-from db_data.models.material import Material
-from db_data.models.score import Score
-from db_data.models.workshop import Workshop
-from django import forms
-from django.contrib import admin
-from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
-from django.contrib.auth.forms import ReadOnlyPasswordHashField
-
-# from db_data.inlines.material_inline_admin import MaterialInlineAdmin
-# from db_data.inlines.assignment_file_inline_admin \
-#     import AssignmentFileInlineAdmin
-# from db_data.inlines.lecture_inline_admin import LectureInlineAdmin
-# from db_data.inlines.assignemt_inline_admin import AssignmenteInlineAdmin
 
 
 class AccountCreationForm(forms.ModelForm):
@@ -117,83 +100,9 @@ class BaseAccountAdmin(BaseUserAdmin):
     list_filter = ()
 
 
-class MaterialAdmin(admin.ModelAdmin):
-    """Custom admin class for Notes model."""
-
-    list_display = ["file", "file_name", "file_type"]
-    readonly_fields = [
-        "id",
-    ]
 
 
-class AssignmentFileAdmin(admin.ModelAdmin):
-    """Custom admin class for Notes model."""
-
-    list_display = ["file", "file_name", "file_type"]
-    readonly_fields = [
-        "id",
-    ]
 
 
-class LectureAdmin(admin.ModelAdmin):
-    """Custom admin class for Notes model."""
 
-    list_display = ["name", "url", "workshop"]
-    readonly_fields = [
-        "id",
-    ]
-    # inlines = [
-    #     # MaterialInlineAdmin
-    # ]
-
-
-class AssignmentAdmin(admin.ModelAdmin):
-    """Custom admin class for Notes model."""
-
-    list_display = ["name", "total_marks"]
-    readonly_fields = [
-        "id",
-    ]
-    # inlines = [
-    #     # AssignmentFileInlineAdmin
-    # ]
-
-
-class WorkshopAdmin(admin.ModelAdmin):
-    """Custom admin class for Notes model."""
-
-    list_display = ["name", "level", "start_date", "end_date", "mode"]
-    readonly_fields = [
-        "id",
-    ]
-    # inlines = [
-    #     # AssignmenteInlineAdmin, LectureInlineAdmin
-    # ]
-
-
-class ScoreAdmin(admin.ModelAdmin):
-    """Custom admin class for Notes model."""
-
-    list_display = ["score", "assignment", "student"]
-    readonly_fields = [
-        "id",
-    ]
-
-
-class AttendanceAdmin(admin.ModelAdmin):
-    """Custom admin class for Notes model."""
-
-    list_display = ["present", "lecture", "student"]
-    readonly_fields = [
-        "id",
-    ]
-
-
-admin.site.register(Material, MaterialAdmin)
-admin.site.register(AssignmentFile, AssignmentFileAdmin)
-admin.site.register(Workshop, WorkshopAdmin)
-admin.site.register(Lecture, LectureAdmin)
-admin.site.register(Assignment, AssignmentAdmin)
-admin.site.register(Score, ScoreAdmin)
-admin.site.register(Attendance, AttendanceAdmin)
 admin.site.register(BaseUser, BaseAccountAdmin)
