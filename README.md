@@ -1,16 +1,5 @@
-# Arisbe_Backend
-## _Student Management System_
 
-Completed by Carteblanche throught the power of  ✨Magic ✨
-
-## Installation
-
-Clone the repo and then use the following command to start the app
-
-```sh
-docker-compose up
 ```
-# arisbe_webapp_backend
 ## _Student Management System_
 
 Completed by Carteblanche through the power of  ✨Magic ✨
