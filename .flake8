@@ -1,0 +1,28 @@
+[flake8]
+select = C,E,F,W,B,N,T,LPY,SPR,DJ
+exclude =
+  .venv,
+  env,
+  **/migrations/**,
+  __pycache__,
+  manage.py,
+  **/backend/settings/**,
+  **/management/**
+extend-ignore =
+  D10,
+  D200,
+  D202,
+  D203,
+  D205,
+  D212,
+  D400,
+  D401,
+  D404,
+  D417,
+  E203,
+  E402,
+  F405,
+  N815,
+  W503
+max-line-length = 88
+max-complexity = 13

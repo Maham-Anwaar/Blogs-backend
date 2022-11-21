@@ -1,0 +1,62 @@
+version: '3.8'
+
+services:
+  nginx:
+    build: ./nginx
+    volumes:
+      - static_volume:/home/app/staticfiles
+      - media_volume:/home/app/mediafiles
+    ports:
+      - 9000:80
+    depends_on:
+      - web
+
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: |
+      sh -c "python manage.py flush --no-input &&
+      python manage.py migrate &&
+      python manage.py collectstatic --no-input &&
+      python manage.py createsuperuser --no-input &&
+      gunicorn backend.wsgi:application --bind 0.0.0.0:9000 --reload"
+    restart: always
+    volumes:
+      - ./app:/home/app/code
+      - static_volume:/home/app/staticfiles
+      - media_volume:/home/app/mediafiles
+    expose:
+      - 9000
+    environment:
+      - DJANGO_SETTINGS_MODULE=backend.settings.dev
+      - DEBUG=1
+      - SECRET_KEY=(*dr1%qw9v7cj_prf=i1g%s_&!m6ptije728mpunq4tn+%(n_-
+      - DJANGO_ALLOWED_HOSTS=localhost 127.0.0.1 [::1]
+      - CSRF_TRUSTED_ORIGINS=http://127.0.0.1:9000 http://localhost:9000
+      - DJANGO_SUPERUSER_PASSWORD=django
+      - DJANGO_SUPERUSER_USERNAME=django
+      - DJANGO_SUPERUSER_EMAIL=django@test.com
+      - SQL_ENGINE=django.db.backends.postgresql
+      - SQL_DATABASE=postgres
+      - SQL_USER=postgres
+      - SQL_PASSWORD=postgres
+      - SQL_HOST=db
+      - SQL_PORT=5432
+      - DATABASE=postgres
+    depends_on:
+      - db
+
+  db:
+    image: postgres:15-alpine
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=postgres
+
+volumes:
+  postgres_data:
+  static_volume:
+  media_volume:
