@@ -1,8 +1,4 @@
-## _Student Management System_
-```
-Completed by Carteblanche through the power of  ✨Magic ✨
 
-## Installation
 
 Clone the repo and then use the following command to start the app
 
