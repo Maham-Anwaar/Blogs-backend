@@ -8,7 +8,7 @@ DEBUG = int(os.environ.get("DEBUG", default=0))
 
 # 'DJANGO_ALLOWED_HOSTS' should be a single string of hosts with a space between each.
 # For example: 'DJANGO_ALLOWED_HOSTS=localhost 127.0.0.1 [::1]'
-ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS").split(" ")
+ALLOWED_HOSTS = ['*'] 
 CSRF_TRUSTED_ORIGINS = os.environ.get("CSRF_TRUSTED_ORIGINS").split(" ")
 
 INSTALLED_APPS += [
@@ -18,7 +18,6 @@ INSTALLED_APPS += [
     "rest_framework_simplejwt.token_blacklist",
     # custom
     "user",
-    "db_data",
     "core",
 ]
 
@@ -45,14 +44,11 @@ REST_FRAMEWORK = {
         "rest_framework.permissions.IsAuthenticated",
     ],
     "DEFAULT_AUTHENTICATION_CLASSES": ["rest_framework_simplejwt.authentication.JWTAuthentication"],
-    # "DEFAULT_RENDERER_CLASSES": [
-    #     "rest_framework.renderers.JSONRenderer",
-    #     "core.renderers.OnlyRawBrowsableAPIRenderer",
-    # ],
-    # "PAGE_SIZE": 15,
+    "PAGE_SIZE": 15,
 }
+AUTHENTICATION_BACKENDS = ['users.auth_backends.EmailBackend']
 
 del AUTH_PASSWORD_VALIDATORS[-3:]
 AUTH_PASSWORD_VALIDATORS.append({"NAME": "db_data.validations.PasswordValidation"})
 
-AUTH_USER_MODEL = "db_data.BaseUser"
+AUTH_USER_MODEL = "user.User"

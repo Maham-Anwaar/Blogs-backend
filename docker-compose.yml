@@ -7,7 +7,7 @@ services:
       - static_volume:/home/app/staticfiles
       - media_volume:/home/app/mediafiles
     ports:
-      - 9000:80
+      - 8000:80
     depends_on:
       - web
 
@@ -20,20 +20,20 @@ services:
       python manage.py migrate &&
       python manage.py collectstatic --no-input &&
       python manage.py createsuperuser --no-input &&
-      gunicorn backend.wsgi:application --bind 0.0.0.0:9000 --reload"
+      gunicorn backend.wsgi:application --bind 0.0.0.0:8000 --reload"
     restart: always
     volumes:
       - ./app:/home/app/code
       - static_volume:/home/app/staticfiles
       - media_volume:/home/app/mediafiles
     expose:
-      - 9000
+      - 8000
     environment:
       - DJANGO_SETTINGS_MODULE=backend.settings.dev
       - DEBUG=1
       - SECRET_KEY=(*dr1%qw9v7cj_prf=i1g%s_&!m6ptije728mpunq4tn+%(n_-
       - DJANGO_ALLOWED_HOSTS=localhost 127.0.0.1 [::1]
-      - CSRF_TRUSTED_ORIGINS=http://127.0.0.1:9000 http://localhost:9000
+      - CSRF_TRUSTED_ORIGINS=http://127.0.0.1:8000 http://localhost:8000
       - DJANGO_SUPERUSER_PASSWORD=django
       - DJANGO_SUPERUSER_USERNAME=django
       - DJANGO_SUPERUSER_EMAIL=django@test.com
