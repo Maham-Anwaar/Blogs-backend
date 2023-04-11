@@ -20,6 +20,7 @@ INSTALLED_APPS += [
     # custom
     "user",
     "core",
+    "blog",
 ]
 
 DATABASES = {
