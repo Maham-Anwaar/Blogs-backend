@@ -8,13 +8,13 @@ class CommentInline(admin.TabularInline):
     readonly_fields = ('user', 'body')
 
 class BlogPostAdmin(admin.ModelAdmin):
-    list_display = ('title', 'user', )
+    list_display = ('title', 'user', 'id', )
     list_filter = ('user', )
     search_fields = ('title', 'user__email', 'user__first_name', 'user__last_name')
     inlines = [CommentInline]
 
 class CommentAdmin(admin.ModelAdmin):
-    list_display = ('body', 'user', 'post', 'parent')
+    list_display = ('body', 'user', 'post', 'parent' , 'id', )
     list_filter = ('user', 'post', 'parent')
     search_fields = ('body', 'user__email', 'user__first_name', 'user__last_name')
 
