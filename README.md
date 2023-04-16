@@ -22,8 +22,3 @@ When you want to migrate db changes
 2. docker-compose run web python manage.py migrate
 ```
 
-## Collect static
-
-```sh
-docker-compose exec web python manage.py collectstatic
-```
